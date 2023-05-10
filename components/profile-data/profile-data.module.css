@@ -1,0 +1,33 @@
+.editableContainer,
+.readableContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.editableContainer {
+  justify-content: flex-start;
+}
+
+.editable::after {
+  content: url("/icons/edit.svg");
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.headingUnderlined {
+  text-decoration: underline;
+}
+
+.readableContainer {
+  justify-content: space-between;
+}
+
+.readable::after {
+  content: url("/icons/read.svg");
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+}

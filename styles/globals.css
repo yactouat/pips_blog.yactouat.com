@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SO tailwind styles */
+@layer utilities {
+  .section-min-height {
+    min-height: calc(100vh - 68px);
+  }
+  .toggle-menu-btn {
+    /* creating a child selector here, the `&` represents the parent here */
+    @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent [&>div]:rotate-[360deg];
+  }
+}
+/* EO tailwind styles */
+
+/* SO general styles */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+/* EO general styles */
+
+/* SO dynamic blog post styles, this is put here because we "dangerously" set inner HTML in the blog post page */
+.blogPostContainer .content-links::after {
+  content: url("/icons/external-link.svg");
+  margin-left: 4px;
+  margin-right: 4px;
+}
+/* dark theme */
+@media (prefers-color-scheme: dark) {
+  .blogPostContainer h2,
+  .blogPostContainer h3,
+  .blogPostContainer h4,
+  .blogPostContainer h5,
+  .blogPostContainer h6,
+  .blogPostContainer a,
+  .blogPostContainer a:visited,
+  .blogPostContainer a:active,
+  .blogPostContainer a:hover,
+  .blogPostContainer code,
+  .blogPostContainer strong {
+    color: #fff;
+  }
+}
+/* EO dynamic blog post styles */
+
+/* SO soviet theme */
+:root {
+  --lprimary: #0000ff;
+  --lprimaryt1: #3232ff;
+  --lprimaryt2: #4c4cff;
+  --lprimaryt3: #6666ff;
+  --lsecondary: #ff0000;
+  --primary: #ff0000;
+  --secondary: #ffff00;
+}
+.bg-soviet {
+  background-color: var(--primary);
+}
+.bg-soviet-primary-interactive {
+  background-color: var(--lprimaryt1);
+}
+.bg-soviet-primary-interactive:hover {
+  background-color: var(--lprimaryt2);
+}
+.bg-soviet-primary-interactive:active {
+  background-color: var(--lprimaryt3);
+}
+.lbg-soviet {
+  background-color: var(--primary);
+}
+.secondary-soviet {
+  color: var(--lsecondary);
+}
+/* dark theme */
+@media (prefers-color-scheme: dark) {
+  .secondary-soviet {
+    color: var(--secondary);
+  }
+}
+/* EO soviet theme */

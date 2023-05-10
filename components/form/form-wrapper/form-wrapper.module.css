@@ -1,0 +1,20 @@
+.formContainer,
+.form {
+  width: 100%;
+}
+
+.formContainer {
+  padding: 24px;
+  border-radius: 5px;
+  max-width: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
