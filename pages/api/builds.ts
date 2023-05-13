@@ -56,7 +56,8 @@ export default async function handler(
         (message as BlogPostPublishedPubSubMessage).name.startsWith("published")
       ) {
         try {
-          await deletePrevBuilds();
+          // TODO cron job to delete previous builds on blog posts updates
+          // await deletePrevBuilds();
           await postVercelBuild();
         } catch (error) {
           console.log("Pub/Sub event workflow Vercel build partly KO");
