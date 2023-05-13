@@ -57,7 +57,7 @@ export default async function handler(
       ) {
         try {
           await postVercelBuild();
-          await deletePrevBuilds();
+          // await deletePrevBuilds();
         } catch (error) {
           console.log("Pub/Sub event workflow Vercel build partly KO");
         }
