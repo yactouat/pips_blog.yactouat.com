@@ -21,7 +21,9 @@ const getAppData = async (
     !process.env.APP_TITLE ||
     !process.env.APP_THEME_COLOR ||
     !process.env.APP_DESCRIPTION ||
-    !process.env.APP_URL
+    !process.env.APP_URL ||
+    !process.env.PUBSUB_TOKEN_AUDIENCE ||
+    !process.env.PUBSUB_TOKEN_EMAIL
   ) {
     throw new Error("all env vars must be set");
   }
