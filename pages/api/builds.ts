@@ -55,7 +55,7 @@ export default async function handler(
         try {
           await postVercelBuild();
         } catch (error) {
-          console.log("Pub/Sub event workflow Vercel build part KO");
+          console.log("Pub/Sub event workflow Vercel build partly KO");
         }
       }
       // responding to the inbound request so no reties will be attempted
@@ -63,7 +63,12 @@ export default async function handler(
         console.log("Pub/Sub event workflow outcome OK");
         sendJsonResponse(res, 200, "blog.yactouat.com build triggered");
       } else {
-        console.log("Pub/Sub event workflow outcome KO");
+        console.log(
+          "Pub/Sub event workflow outcome KO", 
+          `audience: ${process.env.PUBSUB_TOKEN_AUDIENCE}`, 
+          `email: ${process.env.PUBSUB_TOKEN_EMAIL}}`,
+          `message: ${message}`
+        );
         sendJsonResponse(res, 422, "Pub/Sub event workflow outcome KO");
       }
     } else {
