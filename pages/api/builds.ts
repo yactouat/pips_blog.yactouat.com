@@ -67,7 +67,7 @@ export default async function handler(
           "Pub/Sub event workflow outcome KO", 
           `audience: ${process.env.PUBSUB_TOKEN_AUDIENCE}`, 
           `email: ${process.env.PUBSUB_TOKEN_EMAIL}}`,
-          `message: ${message}`
+          `message: ${JSON.stringify(message)}`
         );
         sendJsonResponse(res, 422, "Pub/Sub event workflow outcome KO");
       }
