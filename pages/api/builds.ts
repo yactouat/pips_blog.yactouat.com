@@ -11,6 +11,13 @@ type Data = {
   name: string;
 };
 
+const deletePrevBuilds = async (): Promise<void> => {
+  const vercelDeployments = (await getVercelBuilds()).filter(
+    (dep) => dep.meta.githubRepo == process.env.REPO_NAME
+  );
+  await deletePrevVercelBuilds(vercelDeployments);
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -21,11 +28,7 @@ export default async function handler(
   }
   try {
     if (req.query.key === "deletePrevious") {
-      // fetching list of deployments
-      const vercelDeployments = (await getVercelBuilds()).filter(
-        (dep) => dep.meta.githubRepo == process.env.REPO_NAME
-      );
-      await deletePrevVercelBuilds(vercelDeployments);
+      await deletePrevBuilds();
       sendJsonResponse(res, 200, "prev deployments deleted");
       return;
     }
@@ -54,6 +57,7 @@ export default async function handler(
       ) {
         try {
           await postVercelBuild();
+          await deletePrevBuilds();
         } catch (error) {
           console.log("Pub/Sub event workflow Vercel build partly KO");
         }
