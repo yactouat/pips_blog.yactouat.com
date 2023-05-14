@@ -18,6 +18,7 @@ const DataCardsList = ({ data, sectionId, sectionTitle }: DataCardsListProps) =>
               subtext1: dataCard.data.subtext1,
               title: dataCard.data.title,
             }}
+            key={dataCard.dataKey}
           />
         ))}
       </ul>
