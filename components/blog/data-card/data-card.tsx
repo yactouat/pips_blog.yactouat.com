@@ -1,15 +1,15 @@
 import Image from "next/image";
 
-import BlogPostCardProps from "./BlogPostCardProps";
-import styles from "./blog-post-card.module.css";
+import DataCardProps from "./DataCardProps";
 import Date from "@/components/date";
 import Link from "next/link";
+import styles from "./data-card.module.css";
 
-const BlogPostCard = ({ data, slug }: BlogPostCardProps) => {
+const DataCard = ({ baseUrl, data, key }: DataCardProps) => {
   return (
     <Link
-      href={`/posts/${slug}`}
-      className="h-40 sm:h-60 w-full sm:w-2/6 border border-solid border-template-lneutralt1 dark:border-template-dneutrals1 bg-template-lbg dark:bg-template-dbg px-2 rounded-3xl shadow-xl"
+      href={`${baseUrl}/${key}`}
+      className={`h-40 sm:h-60 w-full ${styles.dataCard} border border-solid border-template-lneutralt1 dark:border-template-dneutrals1 bg-template-lbg dark:bg-template-dbg px-2 rounded-3xl shadow-xl`}
     >
       <li className="flex flex-col items-center justify-end h-full py-2">
         {data.image && (
@@ -22,10 +22,10 @@ const BlogPostCard = ({ data, slug }: BlogPostCardProps) => {
             height={data.image.height ? data.image.height : 250}
           />
         )}
-        <h3 className="text-ellipsis overflow-hidden h-3/5 text-3xl text-center text-template-lneutralt1 dark:text-template-dneutral flex items-start">
+        <h3 className="text-ellipsis overflow-hidden h-3/5 text-2xl text-center text-template-lneutralt1 dark:text-template-dneutral flex items-start">
           <span>{data.title}</span>
         </h3>
-        <div className="sm:block text-3xl mt-2 text-center text-template-lneutralt3 dark:text-template-dneutrals3">
+        <div className="sm:block text-2xl mt-2 text-center text-template-lneutralt3 dark:text-template-dneutrals3">
           <p className="">
             <Date dateString={data.subtext1} />
           </p>
@@ -38,4 +38,4 @@ const BlogPostCard = ({ data, slug }: BlogPostCardProps) => {
   );
 };
 
-export default BlogPostCard;
+export default DataCard;

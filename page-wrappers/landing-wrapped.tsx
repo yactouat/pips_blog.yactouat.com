@@ -3,13 +3,13 @@ import { useContext, useEffect } from "react";
 
 import AppDataContext from "@/app-state/app-data/app-data-context";
 import AppSection from "@/components/app-section/app-section";
-import BlogPostsList from "@/components/blog/blog-posts-list/blog-posts-list";
 import Card from "@/components/card/card";
 import ContactForm from "@/components/contact-form/contact-form";
 import Hr from "@/components/hr";
 import MainLayout from "@/components/main-layout/main-layout";
 import Testimonial from "@/components/testimonial/testimonial";
 import UserProfileContext from "@/app-state/user-profile/user-profile-context";
+import DataCardsList from "@/components/blog/data-cards-list/data-cards-list";
 
 const LandingWrapped = () => {
   const { data, setAppData } = useContext(AppDataContext);
@@ -33,7 +33,22 @@ const LandingWrapped = () => {
         <meta name="description" content={data!.description} />
       </Head>
 
-      {data!.blogPostsList && <BlogPostsList posts={data!.blogPostsList} />}
+      {/* {data!.blogPostsList && <BlogPostsList posts={data!.blogPostsList} />} */}
+
+      {data!.blogPostsList && <DataCardsList 
+        baseUrl="/posts" 
+        data={data!.blogPostsList.map(post => {
+          return {
+            key: post.slug,
+            data: {
+              subtext1: post.date,
+              title: post.title,
+            }
+          }
+        })}
+        sectionId="articles" 
+        sectionTitle="Articles"
+      />} 
 
       {data!.pricingPlans && (
         <>

@@ -1,13 +1,13 @@
-.list {
+.dataCardsList {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 @media screen and (min-width: 640px) {
-  .list {
+  .dataCardsList {
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 }
