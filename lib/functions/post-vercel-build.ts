@@ -2,7 +2,7 @@ import axios from "axios";
 import getVercelBuilds from "pips_shared/dist/functions/get-vercel-builds";
 import { VercelDeploymentType as VercelDeployment } from "pips_shared/dist/types";
 
-const postVercelBuild = async (): Promise<boolean> => {
+const postVercelBuild = async (referenceGitBranch: string = "main"): Promise<boolean> => {
   let buildWentThrough = false;
   try {
     // fetching list of deployments
@@ -13,10 +13,12 @@ const postVercelBuild = async (): Promise<boolean> => {
     // looping through deployments to find the latest ready one from GitOps
     for (let i = 0; i < vercelDeployments.length; i++) {
       const deployment: VercelDeployment = vercelDeployments[i];
+      console.info("your reference branch is most likely: ", vercelDeployments[i].meta.githubCommitRef);
+      console.info("your specified reference branch is: ", referenceGitBranch);
       // found the latest master branch ready deployment
       if (
         deployment.state == "READY" &&
-        deployment.meta.githubCommitRef == "master"
+        deployment.meta.githubCommitRef == referenceGitBranch
       ) {
         // call for triggering a new build
         const vercelBuildAPICall = await axios({
@@ -41,13 +43,13 @@ const postVercelBuild = async (): Promise<boolean> => {
         buildWentThrough = vercelBuildAPICall.status == 200;
         if (!buildWentThrough) {
           // so I can see the logs in the cloud
-          console.log("FAILED VERCEL BUILD RES", vercelBuildRes);
+          console.error("FAILED VERCEL BUILD RES", vercelBuildRes);
         }
         break;
       }
     }
   } catch (error) {
-    console.log("new build process failed", error);
+    console.error("new build process failed");
   }
   return buildWentThrough;
 };

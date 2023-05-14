@@ -57,18 +57,18 @@ export default async function handler(
       ) {
         try {
           // TODO cron job to delete previous builds on blog posts updates
-          // await deletePrevBuilds();
+          await deletePrevBuilds();
           await postVercelBuild();
         } catch (error) {
-          console.log("Pub/Sub event workflow Vercel build partly KO");
+          console.error("Pub/Sub event workflow failed on deleting previous builds and deploying new one");
         }
       }
       // responding to the inbound request so no reties will be attempted
       if (pubSubEventWorkflowOk) {
-        console.log("Pub/Sub event workflow outcome OK");
+        console.info("Pub/Sub event workflow outcome OK");
         sendJsonResponse(res, 200, "blog.yactouat.com build triggered");
       } else {
-        console.log(
+        console.warn(
           "Pub/Sub event workflow outcome KO", 
           `audience: ${process.env.PUBSUB_TOKEN_AUDIENCE}`, 
           `email: ${process.env.PUBSUB_TOKEN_EMAIL}}`,
