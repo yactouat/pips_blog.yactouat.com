@@ -5,10 +5,11 @@ import Date from "@/components/date";
 import Link from "next/link";
 import styles from "./data-card.module.css";
 
-const DataCard = ({ baseUrl, data, key }: DataCardProps) => {
+const DataCard = ({ baseUrl, data, dataKey }: DataCardProps) => {
+
   return (
     <Link
-      href={`${baseUrl}/${key}`}
+      href={`${baseUrl}/${dataKey}`}
       className={`h-40 sm:h-60 w-full ${styles.dataCard} border border-solid border-template-lneutralt1 dark:border-template-dneutrals1 bg-template-lbg dark:bg-template-dbg px-2 rounded-3xl shadow-xl`}
     >
       <li className="flex flex-col items-center justify-end h-full py-2">

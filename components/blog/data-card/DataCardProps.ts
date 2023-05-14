@@ -2,7 +2,7 @@ import CardProps from "@/components/card/CardProps";
 
 interface DataCardProps extends CardProps {
   baseUrl?: string;
-  key: string;
+  dataKey: string;
 }
 
 export default DataCardProps;

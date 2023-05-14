@@ -39,7 +39,8 @@ const LandingWrapped = () => {
         baseUrl="/posts" 
         data={data!.blogPostsList.map(post => {
           return {
-            key: post.slug,
+            baseUrl: "/posts",
+            dataKey: post.slug,
             data: {
               subtext1: post.date,
               title: post.title,
