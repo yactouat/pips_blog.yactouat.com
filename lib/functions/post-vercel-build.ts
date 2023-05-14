@@ -1,6 +1,6 @@
 import axios from "axios";
 import getVercelBuilds from "pips_shared/dist/functions/get-vercel-builds";
-import { VercelDeploymentType as VercelDeployment } from "pips_shared/dist/types";
+import { VercelDeploymentType } from "pips_shared/dist/types";
 
 const postVercelBuild = async (referenceGitBranch: string = "main"): Promise<boolean> => {
   let buildWentThrough = false;
@@ -12,7 +12,7 @@ const postVercelBuild = async (referenceGitBranch: string = "main"): Promise<boo
     // console.log("latest vercel deployment", vercelDeployments[0]);
     // looping through deployments to find the latest ready one from GitOps
     for (let i = 0; i < vercelDeployments.length; i++) {
-      const deployment: VercelDeployment = vercelDeployments[i];
+      const deployment: VercelDeploymentType = vercelDeployments[i];
       console.info("your reference branch is most likely: ", vercelDeployments[i].meta.githubCommitRef);
       console.info("your specified reference branch is: ", referenceGitBranch);
       // found the latest master branch ready deployment

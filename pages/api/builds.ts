@@ -1,11 +1,47 @@
 import BlogPostPublishedPubSubMessage from "@/lib/interfaces/business/blog-post-published-pubsub-message";
-import comesFromLegitPubsub from "pips_shared/dist/functions/comes-from-legit-pubsub";
 import decodePubSubMessage from "pips_shared/dist/functions/decode-pubsub-message";
 import deletePrevVercelBuilds from "pips_shared/dist/functions/delete-prev-vercel-builds";
 import getVercelBuilds from "pips_shared/dist/functions/get-vercel-builds";
+import jwtDecode from "jwt-decode";
 import type { NextApiRequest, NextApiResponse } from "next";
 import postVercelBuild from "@/lib/functions/post-vercel-build";
 import sendJsonResponse from "pips_shared/dist/functions/send-json-response";
+
+const comesFromLegitPubsub = (
+  req: {
+    headers: {
+      authorization?: string;
+    };
+    body: {
+      message: {
+        data: string;
+      };
+    };
+  },
+  expectedPubSubTokenAud: string,
+  expectedPubSubTokenEmail: string
+): boolean => {
+  // pessimistc assumption
+  let comesFromLegitPubSub = false;
+  // get the Cloud Pub/Sub-generated JWT in the "Authorization" header.
+  const authHeader = req.headers.authorization ?? "";
+  const token = authHeader.substring(7);
+  // decode the JWT
+  const decodedToken = jwtDecode(token);
+  // verifying the claims
+  comesFromLegitPubSub =
+    (
+      decodedToken as {
+        aud: string;
+      }
+    ).aud === expectedPubSubTokenAud &&
+    (
+      decodedToken as {
+        email: string;
+      }
+    ).email === expectedPubSubTokenEmail;
+  return comesFromLegitPubSub;
+};
 
 type Data = {
   name: string;

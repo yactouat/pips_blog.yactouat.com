@@ -1,6 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { APIResponseType } from "pips_shared/dist/types";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+type APIResponseType = {
+  msg: string;
+  data: {}[] | {} | null;
+};
+
 
 export default function handler(
   req: NextApiRequest,
