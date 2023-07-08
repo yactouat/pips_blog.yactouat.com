@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { UserProfileModificationType } from "pips_shared/dist/types";
 
 import AppDataContext from "@/app-state/app-data/app-data-context";
 import AppFeedbackContext from "@/app-state/app-feedback/app-feedback-context";
@@ -20,7 +21,6 @@ import EditProfileData from "@/components/profile-data/edit-profile-data";
 import MainLayout from "@/components/main-layout/main-layout";
 import ReadProfileData from "@/components/profile-data/read-profile-data";
 import UserProfileContext from "@/app-state/user-profile/user-profile-context";
-import UserProfileModificationType from "@/lib/types/UserProfileModificationType";
 import UserProfileData from "@/lib/interfaces/business/user-profile-data";
 
 const ProfileWrapped = () => {

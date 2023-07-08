@@ -1,12 +1,17 @@
-import html from "remark-html";
 import postProcessBlogPostImagesUrls from "pips_shared/dist/functions/post-process-blog-post-images-urls";
-import { remark } from "remark";
+import remarkParse from "remark-parse";
+import remarkHtml, { Root } from "remark-html";
+import {Plugin, unified} from "unified";
 
 import BlogArticleAppData from "../interfaces/business/blog-article-app-data";
 import BlogArticlesAppData from "../interfaces/business/blog-articles-app-data";
 import getPostsMetadata from "./get-posts-metadata";
 import getPublishedPostData from "pips_shared/dist/functions/get-published-post-data";
 import STATIC_APP_DATA from "@/STATIC_APP_DATA";
+
+const processor = unified()
+  .use(remarkParse)
+  .use(remarkHtml as Plugin<[], Root, string>);
 
 const getAppData = async (
   withBlogPostsList: boolean = false,
@@ -22,8 +27,8 @@ const getAppData = async (
     !process.env.APP_THEME_COLOR ||
     !process.env.APP_DESCRIPTION ||
     !process.env.APP_URL ||
-    !process.env.PUBSUB_TOKEN_AUDIENCE ||
-    !process.env.PUBSUB_TOKEN_EMAIL
+    (process.env.NODE_ENV != "development" && !process.env.PUBSUB_TOKEN_AUDIENCE) ||
+    (process.env.NODE_ENV != "development" && !process.env.PUBSUB_TOKEN_EMAIL)
   ) {
     throw new Error("all env vars must be set");
   }
@@ -39,7 +44,7 @@ const getAppData = async (
     }
     if (singlePostSlug) {
       const blogPostData = await getPublishedPostData(singlePostSlug);
-      let blogPost = (await remark().use(html).process(blogPostData.contents))
+      let blogPost = (await processor.process(blogPostData.contents))
         .toString()
         // adding target="_blank" to all content links
         .replace(

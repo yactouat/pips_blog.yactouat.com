@@ -1,5 +1,4 @@
 import BlogPostPublishedPubSubMessage from "@/lib/interfaces/business/blog-post-published-pubsub-message";
-import decodePubSubMessage from "pips_shared/dist/functions/decode-pubsub-message";
 import deletePrevVercelBuilds from "pips_shared/dist/functions/delete-prev-vercel-builds";
 import getVercelBuilds from "pips_shared/dist/functions/get-vercel-builds";
 import jwtDecode from "jwt-decode";
@@ -84,7 +83,7 @@ export default async function handler(
         process.env.PUBSUB_TOKEN_AUDIENCE as string,
         process.env.PUBSUB_TOKEN_EMAIL as string
       );
-      const message = decodePubSubMessage(req);
+      const message = JSON.parse(Buffer.from(req.body.message.data, "base64").toString("utf-8"));
       // console.log("Pub/Sub event workflow message", message);
       // posting the build request only if published post
       if (

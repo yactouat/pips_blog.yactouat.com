@@ -36,7 +36,6 @@ Go to blog.yactouat.com or clone the repo and run `npm install && npm run dev` t
 - [Typescript](https://www.typescriptlang.org/)
 - this frontend app' is meant to be used with <https://github.com/yactouat/pips_channel_personal-website_api> running on port 8080 by default on localhost
 - a couple of env vars, listed in `.env.example`
-- the [API that this thing is designed to run with](https://github.com/yactouat/pips_channel_personal-website_api)
 
 Then, to personnalize it for your own needs, you may have a look at `./STATIC_APP_DATA.ts` to change the app' name, description, etc.
 

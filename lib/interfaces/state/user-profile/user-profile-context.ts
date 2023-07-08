@@ -1,4 +1,5 @@
-import UserProfileModificationType from "@/lib/types/UserProfileModificationType";
+import { UserProfileModificationType } from "pips_shared/dist/types";
+
 import UserProfileData from "../../business/user-profile-data";
 
 interface UserProfileContext {

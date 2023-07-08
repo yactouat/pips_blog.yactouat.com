@@ -1,8 +1,8 @@
 import { createContext } from "react";
+import { UserProfileModificationType } from "pips_shared/dist/types";
 
 import UserProfileContextInterface from "@/lib/interfaces/state/user-profile/user-profile-context";
 import UserProfileDataInterface from "@/lib/interfaces/business/user-profile-data";
-import UserProfileModificationType from "@/lib/types/UserProfileModificationType";
 
 const UserProfileContext = createContext<UserProfileContextInterface>({
   autoSignIn: async () => new Promise(() => null),

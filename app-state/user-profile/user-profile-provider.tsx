@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserProfileModificationType } from "pips_shared/dist/types";
 import { ReactNode, useReducer } from "react";
 
 import getAuthHeaders from "@/lib/functions/get-auth-headers";
