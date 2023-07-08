@@ -10,7 +10,6 @@ import {
 import signUserInCall from "@/lib/functions/sign-user-in-call";
 import UserProfileContext from "./user-profile-context";
 import UserProfileData from "@/lib/interfaces/business/user-profile-data";
-import UserProfileModificationType from "@/lib/types/UserProfileModificationType";
 import userProfileReducer from "./user-profile-reducer";
 import { USERS_API_ENDPOINT } from "@/lib/constants/conf_constants";
 
